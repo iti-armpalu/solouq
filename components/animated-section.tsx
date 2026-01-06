@@ -14,7 +14,7 @@ export function AnimatedSection({
   id,
   children,
   className = "",
-  delay = "",
+  delay,
   once = true,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLElement | null>(null)
