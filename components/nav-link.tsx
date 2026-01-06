@@ -3,17 +3,15 @@
 import type React from "react"
 
 interface NavLinkProps {
-  href: string
+  sectionId: string
   children: React.ReactNode
   onClick?: () => void
 }
 
-export function NavLink({ href, children, onClick }: NavLinkProps) {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+export function NavLink({ sectionId, children, onClick }: NavLinkProps) {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
-    // Extract section ID from href (remove # if present)
-    const sectionId = href.startsWith("#") ? href.substring(1) : href
     const element = document.getElementById(sectionId)
 
     if (element) {
@@ -28,13 +26,12 @@ export function NavLink({ href, children, onClick }: NavLinkProps) {
   }
 
   return (
-    <a
-      href={href}
+    <button
       onClick={handleClick}
-      className="text-sm text-muted-foreground hover:text-accent transition-colors relative group cursor-pointer"
+      className="text-sm text-muted-foreground hover:text-accent transition-colors relative group cursor-pointer bg-transparent border-none"
     >
       {children}
       <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
-    </a>
+    </button>
   )
 }

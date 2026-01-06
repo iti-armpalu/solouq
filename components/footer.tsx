@@ -1,13 +1,10 @@
 "use client"
 
-import type React from "react"
-
 import Image from "next/image"
 import Link from "next/link"
 
 export function Footer() {
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault()
+  const handleSmoothScroll = (targetId: string) => {
     const element = document.getElementById(targetId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -38,35 +35,31 @@ export function Footer() {
             <h4 className="font-medium mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="hover:translate-x-2 transition-transform duration-200">
-                <Link
-                  href="#vision"
-                  onClick={(e) => handleSmoothScroll(e, "vision")}
+                <button
+                  onClick={() => handleSmoothScroll("vision")}
                   className="hover:text-accent transition-colors inline-flex items-center hover:gap-2 group/link"
                 >
                   <span className="w-0 h-px bg-accent group-hover/link:w-4 transition-all duration-200" />
                   About Solouq
-                </Link>
+                </button>
               </li>
               <li className="hover:translate-x-2 transition-transform duration-200">
-                <Link
-                  href="#mission"
-                  onClick={(e) => handleSmoothScroll(e, "mission")}
-
+                <button
+                  onClick={() => handleSmoothScroll("mission")}
                   className="hover:text-accent transition-colors inline-flex items-center hover:gap-2 group/link"
                 >
                   <span className="w-0 h-px bg-accent group-hover/link:w-4 transition-all duration-200" />
                   Mission
-                </Link>
+                </button>
               </li>
               <li className="hover:translate-x-2 transition-transform duration-200">
-                <Link
-                  href="#principles"
-                  onClick={(e) => handleSmoothScroll(e, "principles")}
+                <button
+                  onClick={() => handleSmoothScroll("principles")}
                   className="hover:text-accent transition-colors inline-flex items-center hover:gap-2 group/link"
                 >
                   <span className="w-0 h-px bg-accent group-hover/link:w-4 transition-all duration-200" />
                   Principles
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

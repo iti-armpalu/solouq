@@ -75,6 +75,8 @@
 }
 
 @theme inline {
+  /* Add Inter font for headings */
+  --font-heading: "Inter", "Inter Fallback", sans-serif;
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
@@ -122,6 +124,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+   /* Apply Inter font to all heading elements */
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+     font-family: var(--font-heading);
+   }
 
   /* Added custom animations */
   @keyframes gradient {

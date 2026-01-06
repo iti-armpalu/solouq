@@ -1,55 +1,17 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Eye, Lightbulb, Target, Shield, Sparkles, Zap } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState, useRef } from "react"
+import { ArrowRight, Eye, Lightbulb, Target, Shield, Sparkles, Zap, type LucideIcon } from "lucide-react"
+
+import Header from "@/components/header"
+import { Button } from "@/components/ui/button"
 import { AnimatedSection } from "@/components/animated-section"
 import { PillarCard } from "@/components/pillar-card"
 import { PrincipleCard } from "@/components/principle-card"
 import { ProductCard } from "@/components/product-card"
 import { FloatingDecorations } from "@/components/floating-decorations"
-import Header from "@/components/header"
+import { HeroParallax } from "@/components/hero-parallax"
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
-  const observerRef = useRef<IntersectionObserver | null>(null)
 
-  useEffect(() => {
-    setMounted(true)
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => new Set(prev).add(entry.target.id))
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
-      },
-    )
-
-    const sections = document.querySelectorAll("section[id]")
-    sections.forEach((section) => {
-      observerRef.current?.observe(section)
-    })
-
-    return () => {
-      observerRef.current?.disconnect()
-    }
-  }, [])
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -62,13 +24,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="pt-24 sm:pt-40 pb-12 sm:pb-20 px-4 sm:px-6 relative">
-        <div
-          className="container mx-auto max-w-5xl"
-          style={{
-            transform: mounted ? `translateY(${scrollY * 0.3}px)` : undefined,
-            opacity: mounted ? Math.max(1 - scrollY / 500, 0) : 1,
-          }}
-        >
+        <HeroParallax className="container mx-auto max-w-5xl will-change-transform">
           <div className="text-center space-y-6 sm:space-y-8">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent animate-fade-in">
               <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -98,7 +54,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-        </div>
+        </HeroParallax>
 
         <div className="hidden sm:block absolute top-1/4 left-10 w-2 h-2 rounded-full bg-accent/30 animate-float" />
         <div className="hidden sm:block absolute top-1/3 right-20 w-3 h-3 rounded-full bg-accent/20 animate-float-delay" />
@@ -109,24 +65,19 @@ export default function Home() {
       <AnimatedSection
         id="vision"
         className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-muted/30 to-transparent relative"
-        isVisible={visibleSections.has("vision")}
       >
         <div className="container mx-auto max-w-4xl">
           <div className="space-y-4 sm:space-y-6">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-balance group">
               Why Consumer Understanding{" "}
-              <span className="text-accent inline-block">
-                Needs to Change
-              </span>
+              <span className="text-accent inline-block">Needs to Change</span>
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed text-base sm:text-lg">
               <p>
                 Today, brands make decisions based on assumptions, surface-level metrics, and fragmented feedback. But
                 human behavior is complex, contextual, and emotional.
               </p>
-              <p>
-                Solouq exists to close the gap between what people do and why they do it.
-              </p>
+              <p>Solouq exists to close the gap between what people do and why they do it.</p>
               <p className="text-foreground font-medium pt-4 text-xl flex items-center gap-4 group">
                 <Zap className="h-5 w-5 text-accent" />
                 Our belief is simple: Better understanding leads to better decisions, for brands and consumers alike.
@@ -141,14 +92,11 @@ export default function Home() {
       <AnimatedSection
         id="mission"
         className="py-12 sm:py-20 px-4 sm:px-6 relative"
-        isVisible={visibleSections.has("mission")}
         delay="delay-150"
       >
         <div className="container mx-auto max-w-4xl">
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight">
-              Our Mission
-            </h2>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight">Our Mission</h2>
             <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground">
               Our mission is to{" "}
               <span className="text-accent font-semibold relative group">
@@ -171,36 +119,36 @@ export default function Home() {
       <AnimatedSection
         id="build"
         className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-muted/20 to-transparent relative"
-        isVisible={visibleSections.has("build")}
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-center mb-8 sm:mb-16">
             What We <span className="text-accent">Build</span>
           </h2>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <PillarCard
-              icon={Eye}
+              icon={Eye as LucideIcon}
               title="Behavioral Intelligence"
               description="Understanding how people perceive, interpret, and react to digital experiences."
               gradient="from-accent/20 via-accent/5 to-transparent"
               number="01"
             />
             <PillarCard
-              icon={Lightbulb}
+              icon={Lightbulb as LucideIcon}
               title="Insight Automation"
               description="Turning complex behavioral signals into clear, actionable guidance."
               gradient="from-accent/15 via-accent/5 to-transparent"
               number="02"
             />
             <PillarCard
-              icon={Target}
+              icon={Target as LucideIcon}
               title="Design & Decision Support"
               description="Helping teams validate, refine, and optimize experiences before they go live."
               gradient="from-accent/20 via-accent/5 to-transparent"
               number="03"
             />
             <PillarCard
-              icon={Shield}
+              icon={Shield as LucideIcon}
               title="Ethical, Human-Centered AI"
               description="Technology that augments human judgment, not replaces it."
               gradient="from-accent/15 via-accent/5 to-transparent"
@@ -229,16 +177,12 @@ export default function Home() {
       <AnimatedSection
         id="ecosystem"
         className="py-12 sm:py-20 px-4 sm:px-6 relative"
-        isVisible={visibleSections.has("ecosystem")}
       >
         <div className="container mx-auto max-w-4xl">
           <div className="space-y-8 sm:space-y-12">
             <div className="text-center space-y-3 sm:space-y-4 animate-fade-in-up">
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight">
-                The Solouq{" "}
-                <span className="text-accent inline-block">
-                  Ecosystem
-                </span>
+                The Solouq <span className="text-accent inline-block">Ecosystem</span>
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground">
                 Solouq is the vision and research layer. Our products are how that vision becomes real.
@@ -253,6 +197,7 @@ export default function Home() {
               href="https://optml.ai"
               buttonText="Visit OPTML AI"
             />
+
             <div className="bg-muted/50 p-6 sm:p-8 rounded-lg border border-border">
               <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
                 <span className="font-semibold text-foreground">
@@ -279,12 +224,10 @@ export default function Home() {
                   details="ContOpt pioneered our approach to behavioral intelligence, laying the groundwork for OPTML AI's advanced capabilities."
                   href="https://platform.contopt.ai"
                   buttonText="Access Platform"
-                  legacy={true}
+                  legacy
                 />
               </div>
             </div>
-
-
           </div>
         </div>
         <FloatingDecorations variant="minimal" />
@@ -294,16 +237,16 @@ export default function Home() {
       <AnimatedSection
         id="principles"
         className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-muted/20 to-transparent relative"
-        isVisible={visibleSections.has("principles")}
       >
         <div className="container mx-auto max-w-6xl">
           <div className="space-y-8 sm:space-y-12">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-center">
               Our <span className="text-accent">Principles</span>
             </h2>
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <PrincipleCard
-                icon={Eye}
+                icon={Eye as LucideIcon}
                 title="Human behavior is nuanced"
                 subtitle="not binary"
                 description="We embrace complexity over simplification, understanding that behavior exists on a spectrum."
@@ -311,7 +254,7 @@ export default function Home() {
                 index={0}
               />
               <PrincipleCard
-                icon={Sparkles}
+                icon={Sparkles as LucideIcon}
                 title="Insight should be accessible"
                 subtitle="not exclusive"
                 description="Powerful tools shouldn't be locked behind enterprise budgets or technical barriers."
@@ -319,7 +262,7 @@ export default function Home() {
                 index={1}
               />
               <PrincipleCard
-                icon={Lightbulb}
+                icon={Lightbulb as LucideIcon}
                 title="Technology supports decisions"
                 subtitle="not shortcuts"
                 description="We build tools that enhance human judgment, not replace critical thinking."
@@ -327,7 +270,7 @@ export default function Home() {
                 index={2}
               />
               <PrincipleCard
-                icon={Shield}
+                icon={Shield as LucideIcon}
                 title="Ethics and transparency"
                 subtitle="are non-negotiable"
                 description="Responsible innovation means being clear about how our technology works and its limitations."
@@ -335,7 +278,7 @@ export default function Home() {
                 index={3}
               />
               <PrincipleCard
-                icon={Target}
+                icon={Target as LucideIcon}
                 title="Design is a responsibility"
                 subtitle="not just aesthetics"
                 description="Every design choice impacts people. We take that impact seriously."
@@ -343,7 +286,7 @@ export default function Home() {
                 index={4}
               />
               <PrincipleCard
-                icon={Zap}
+                icon={Zap as LucideIcon}
                 title="Better understanding"
                 subtitle="leads to better outcomes"
                 description="When brands truly understand their users, everyone wins, brands and consumers alike."
@@ -354,7 +297,6 @@ export default function Home() {
           </div>
         </div>
       </AnimatedSection>
-
     </main>
   )
 }

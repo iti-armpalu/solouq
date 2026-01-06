@@ -63,11 +63,11 @@ export const Header = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            <NavLink href="#vision">Vision</NavLink>
-            <NavLink href="#mission">Mission</NavLink>
-            <NavLink href="#build">What We Build</NavLink>
-            <NavLink href="#ecosystem">Products</NavLink>
-            <NavLink href="#principles">Principles</NavLink>
+            <NavLink sectionId="vision">Vision</NavLink>
+            <NavLink sectionId="mission">Mission</NavLink>
+            <NavLink sectionId="build">What We Build</NavLink>
+            <NavLink sectionId="ecosystem">Products</NavLink>
+            <NavLink sectionId="principles">Principles</NavLink>
             <a
               href="https://platform.contopt.ai/auth"
               target="_blank"

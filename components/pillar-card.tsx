@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { type LucideIcon, ArrowRight } from "lucide-react"
+import { type LucideIcon } from "lucide-react"
 
 interface PillarCardProps {
   icon: LucideIcon
