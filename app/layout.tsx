@@ -16,24 +16,15 @@ export const metadata: Metadata = {
   title: "Solouq — Shaping the Future of Consumer Behavior",
   description:
     "We believe that understanding human behavior is the foundation of meaningful, responsible, and effective brand experiences. Solouq democratizes behavioral insight through technology.",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
+    icons: {
+      icon: [
+        { url: "/icon.png", sizes: "64x64", type: "image/png" },
+        { url: "/favicon.ico" },
+      ],
+      apple: [
+        { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+    },
 }
 
 export default function RootLayout({
