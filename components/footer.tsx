@@ -27,7 +27,7 @@ export function Footer() {
                 className="h-7 w-auto"
               />
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Shaping the future of consumer behavior through behavioral intelligence.
             </p>
           </div>
@@ -103,7 +103,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-border text-center text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors group">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-border text-center text-xs sm:text-sm text-muted-foreground">
           <span className="inline-block">
             © {new Date().getFullYear()} Solouq. All rights reserved.
           </span>

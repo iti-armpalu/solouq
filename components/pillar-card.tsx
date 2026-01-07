@@ -11,10 +11,10 @@ interface PillarCardProps {
 
 export function PillarCard({ icon: Icon, title, description, gradient, number }: PillarCardProps) {
   return (
-    <Card className="relative p-6 sm:p-8 bg-card hover:bg-accent/5 transition-all duration-500 border-border hover:border-accent/50 group overflow-hidden">
+    <Card className="relative p-6 sm:p-8 bg-card bg-accent/5 transition-all duration-500 border-border border-accent/50 group overflow-hidden">
       {/* Animated gradient background */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 opacity-100 transition-opacity duration-500`}
       />
 
       {/* Large number watermark */}
@@ -25,8 +25,8 @@ export function PillarCard({ icon: Icon, title, description, gradient, number }:
       <div className="relative space-y-3 sm:space-y-4">
         {/* Icon with glow effect */}
         <div className="relative inline-block">
-          <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
-          <div className="relative h-14 w-14 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+          <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full scale-0 scale-150 transition-transform duration-500" />
+          <div className="relative h-14 w-14 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center scale-110 transition-all duration-300">
             <Icon className="h-7 w-7 text-accent" />
           </div>
         </div>
